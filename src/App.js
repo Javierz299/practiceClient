@@ -1,12 +1,34 @@
-import React from 'react';
+import React, { Component } from 'react';
+import config from './config'
 import './App.css';
 
-function App() {
+class App extends Component{
+  state = {
+    hello: 'test',
+  }
+
+  componentDidMount(){
+    fetch(config.API_ENDPOINT, {
+      method: 'GET',
+      headers: {'content-type': 'application/json'}
+    })
+    .then(res => {
+      if(!res.ok){
+        return res.json().then(error => Promise.reject(error))
+      }
+      return res.json()
+    })
+    .then(res => this.setState({hello: res}))
+    
+  }
+
+  render(){
   return (
-    <div className="App">
-     test
+    <div>
+    {this.state.hello ? <div className="App">{this.state.hello}</div> : null}
     </div>
   );
+}
 }
 
 export default App;
