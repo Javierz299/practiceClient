@@ -8,19 +8,23 @@ class App extends Component{
   }
 
   componentDidMount(){
-    fetch(config.API_ENDPOINT, {
-      method: 'GET',
-      headers: {'content-type': 'application/json'}
+    this.asyncFetch()
+  }
+
+  asyncFetch = async () => {
+   await fetch(config.API_ENDPOINT, {
+    method: 'GET',
+    headers: {'content-type': 'application/json'}
     })
     .then(res => {
-      if(!res.ok){
-        return res.json().then(error => Promise.reject(error))
-      }
-      return res.json()
+    if(!res.ok){
+      return res.json().then(error => Promise.reject(error))
+    }
+    return res.json()
     })
     .then(res => this.setState({hello: res}))
-    
-  }
+    }
+
 
   render(){
   return (
