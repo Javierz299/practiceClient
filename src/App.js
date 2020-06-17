@@ -8,7 +8,7 @@ class App extends Component{
   }
 
   componentDidMount(){
-    this.asyncFetch()
+    // this.asyncFetch()
   }
 
   asyncFetch = async () => {

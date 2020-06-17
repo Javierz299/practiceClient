@@ -9,7 +9,7 @@ export class authcheck extends Component {
     send_profile_to_db = (profile) => {
         const data = profile
 
-        axios.post('/api/posts/userprofiletodb', data)
+        axios.post('/api/post/userprofiletodb', data)
             .then(() => axios.get('/api/get/userprofilefromdb'), {params: {email: profile.profile.email}})
                     .then(res => this.props.set_db_profile(res.data))
                     .then(history.replace('/'))
